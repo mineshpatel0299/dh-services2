@@ -7,6 +7,7 @@ import { MdOpacity } from 'react-icons/md';
 const InteractiveSelector = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animatedOptions, setAnimatedOptions] = useState<number[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const options = [
     {
@@ -46,6 +47,20 @@ const InteractiveSelector = () => {
     }
   };
 
+  // Handle window resize for responsive behavior
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Set initial value
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Animate options on mount
   useEffect(() => {
     const timers: NodeJS.Timeout[] = [];
 
@@ -62,17 +77,17 @@ const InteractiveSelector = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#000D23] font-sans text-white">
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#000D23] font-sans text-white py-8 md:py-0">
       {/* Header Section */}
-      <div className="w-full max-w-7xl px-6 mt-8 mb-2 text-center">
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg animate-fadeInTop delay-300">Are you a Startup?</h1>
+      <div className="w-full max-w-7xl px-6 mt-4 md:mt-8 mb-2 text-center">
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg animate-fadeInTop delay-300">Are you a Startup?</h1>
         {/* <p className="text-xl md:text-2xl text-gray-300 font-medium max-w-3xl mx-auto animate-fadeInTop delay-600">Discover our strategic investment sectors driving innovation and transformation.</p> */}
       </div>
 
-      <div className="h-16"></div>
+      <div className="h-8 md:h-16"></div>
 
-      {/* Options Container */}
-      <div className="options flex w-full max-w-[95vw] h-[600px]  rounded-xl  mx-auto  items-stretch overflow-hidden relative">
+      {/* Options Container - Vertical on mobile, Horizontal on desktop */}
+      <div className="options flex flex-col md:flex-row w-full md:max-w-[95vw] min-h-[600px] md:h-[600px] max-w-[90vw] rounded-xl mx-auto items-stretch overflow-hidden relative">
         {options.map((option, index) => (
           <div
             key={index}
@@ -86,20 +101,22 @@ const InteractiveSelector = () => {
                   ? 'var(--tw-gradient-stops, )'
                   : '#18242fe6'
               })`,
-              
+
               backfaceVisibility: 'hidden',
               opacity: animatedOptions.includes(index) ? 1 : 0,
-              transform: animatedOptions.includes(index) ? 'translateX(0)' : 'translateX(-60px)',
-              minWidth: '60px',
-              minHeight: '100px',
+              transform: animatedOptions.includes(index)
+                ? 'translate(0, 0)'
+                : isMobile
+                  ? 'translateY(-30px)'
+                  : 'translateX(-60px)',
+              minWidth: isMobile ? '100%' : '60px',
+              minHeight: isMobile ? (activeIndex === index ? '400px' : '60px') : '100px',
               margin: 0,
-              // borderRadius: '16px',
-            
               cursor: 'pointer',
               boxShadow: activeIndex === index
                 ? '0 20px 60px rgba(0,0,0,0.50)'
                 : '0 10px 30px rgba(0,0,0,0.30)',
-              flex: activeIndex === index ? '7 1 0%' : '1 1 0%',
+              flex: activeIndex === index ? (isMobile ? '10 1 0%' : '7 1 0%') : '1 1 0%',
               zIndex: activeIndex === index ? 10 : 1,
               display: 'flex',
               flexDirection: 'column',
@@ -130,7 +147,8 @@ const InteractiveSelector = () => {
                 }).join(', ')})`
               })
             }}
-            onMouseEnter={() => handleOptionClick(index)}
+            onClick={() => handleOptionClick(index)}
+            onMouseEnter={() => !isMobile && handleOptionClick(index)}
           >
             {/* Shadow effect */}
             <div
@@ -146,11 +164,11 @@ const InteractiveSelector = () => {
 
             {/* Content Area - Shows when active */}
             {activeIndex === index && (
-              <div className="absolute inset-0 p-12 flex flex-col justify-center items-start z-1 animate-fadeIn">
-                <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+              <div className="absolute inset-0 p-5 md:p-12 flex flex-col justify-center items-start z-1 animate-fadeIn overflow-y-auto">
+                <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-6 drop-shadow-lg leading-tight">
                   {option.title}
                 </h2>
-                <p className="text-xl md:text-2xl text-gray-100 leading-relaxed drop-shadow-md max-w-[85%]">
+                <p className="text-sm md:text-xl lg:text-2xl text-gray-100 leading-relaxed drop-shadow-md max-w-full md:max-w-[85%]">
                   {option.description}
                 </p>
               </div>
@@ -160,13 +178,14 @@ const InteractiveSelector = () => {
             {activeIndex !== index && (
               <div
                 className="absolute inset-0 flex items-center justify-center transition-opacity duration-500"
-                style={{
-                  opacity: activeIndex !== index ? 1 : 0,
-                  writingMode: 'vertical-rl',
-                  textOrientation: 'mixed'
-                }}
               >
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-300 tracking-wider">
+                <h3
+                  className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-300 tracking-wider"
+                  style={{
+                    writingMode: isMobile ? 'horizontal-tb' : 'vertical-rl',
+                    textOrientation: isMobile ? 'initial' : 'mixed'
+                  }}
+                >
                   {option.shortTitle}
                 </h3>
               </div>
