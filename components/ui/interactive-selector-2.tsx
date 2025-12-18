@@ -1,48 +1,43 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { FaRocket, FaBrain, FaShieldAlt, FaIndustry, FaStore } from 'react-icons/fa';
+import { FaCampground, FaFire, FaTint, FaHotTub, FaHiking } from 'react-icons/fa';
+import { MdOpacity } from 'react-icons/md';
 
-const InteractiveSelector2 = () => {
+const InteractiveSelector = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animatedOptions, setAnimatedOptions] = useState<number[]>([]);
 
   const options = [
     {
-      title: "Deep Tech & AI",
-      shortTitle: "Deep Tech",
-      description: "Pioneering breakthrough innovations in artificial intelligence, machine learning, and quantum computing. We invest in companies pushing the boundaries of what's technologically possible, from neural networks to autonomous systems.",
-      bgGradient: "from-indigo-600 via-purple-600 to-pink-600",
-      icon: <FaBrain size={32} className="text-white" />
+      title: "Fundraise Preparation",
+      shortTitle: "Fundraise Preparation",
+      description: "Before you hit the market to raise funds, it's vital to be prepared with pitch materials that will pique the curiosity of investors. We craft attractive decks, dynamic models and comprehensive data rooms that make your fund raising journey seamless.",
+      bgGradient: "from-purple-600 via-pink-600 to-red-600",
+      icon: <FaCampground size={32} className="text-white" />
     },
     {
-      title: "Space & Aerospace",
-      shortTitle: "Space Tech",
-      description: "Supporting ventures that are redefining space exploration, satellite technology, and aerospace engineering. From commercial spaceflight to earth observation systems.",
-      bgGradient: "from-slate-600 via-gray-600 to-zinc-600",
-      icon: <FaRocket size={32} className="text-white" />
+      title: "Business Valuation",
+      shortTitle: "Business Valuation",
+      description: "Understanding your Startup's net-worth is vital to ensure that you're not diluting too much equity when raising funds. We can help you uncover the true value of your business that's fair to you as well as the investors. .",
+      bgGradient: "from-green-600 via-emerald-600 to-teal-600",
+      icon: <FaFire size={32} className="text-white" />
     },
     {
-      title: "Cybersecurity & Privacy",
-      shortTitle: "Cybersecurity",
-      description: "Investing in next-generation security solutions that protect digital infrastructure, data privacy, and enterprise systems against evolving cyber threats.",
-      bgGradient: "from-red-600 via-orange-600 to-yellow-600",
-      icon: <FaShieldAlt size={32} className="text-white" />
+      title: "Investment Banking",
+      shortTitle: "Investment Banking",
+      description: "There are thousands of investors participating in the Indian Startup ecosystem, but it's vital to know which ones are right for your venture. We can devise a planned fundraising strategy for you, provide exclusive access to our extensive network of investors, and even lead the negotiations for you until closure.",
+      bgGradient: "from-blue-600 via-indigo-600 to-purple-600",
+      icon: <FaTint size={32} className="text-white" />
     },
     {
-      title: "Industrial IoT & Automation",
-      shortTitle: "IoT",
-      description: "Transforming manufacturing and industrial processes through smart sensors, robotics, and connected devices that optimize efficiency and productivity.",
-      bgGradient: "from-teal-600 via-cyan-600 to-sky-600",
-      icon: <FaIndustry size={32} className="text-white" />
+      title: "Shared CFO",
+      shortTitle: "Shared CFO",
+      description: "SAs the founder of a venture that's growing at a fast pace, managing all functions by yourself can be tough. Our seasoned financial experts can take complete charge of your finance function providing leadership and insights your business needs, precisely when you need them.",
+      bgGradient: "from-red-600 via-rose-600 to-pink-600",
+      icon: <FaHotTub size={32} className="text-white" />
     },
-    {
-      title: "E-Commerce & Retail Tech",
-      shortTitle: "Retail Tech",
-      description: "Revolutionizing the retail experience with omnichannel solutions, personalized shopping, and supply chain innovations that bridge digital and physical commerce.",
-      bgGradient: "from-amber-600 via-orange-600 to-red-600",
-      icon: <FaStore size={32} className="text-white" />
-    }
+   
   ];
 
   const handleOptionClick = (index: number) => {
@@ -70,14 +65,14 @@ const InteractiveSelector2 = () => {
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#000D23] font-sans text-white">
       {/* Header Section */}
       <div className="w-full max-w-7xl px-6 mt-8 mb-2 text-center">
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg animate-fadeInTop delay-300">Emerging Technology Sectors</h1>
-        <p className="text-xl md:text-2xl text-gray-300 font-medium max-w-3xl mx-auto animate-fadeInTop delay-600">Exploring frontier technologies that are shaping the future of innovation and industry.</p>
+        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg animate-fadeInTop delay-300">Are you an Investor</h1>
+        {/* <p className="text-xl md:text-2xl text-gray-300 font-medium max-w-3xl mx-auto animate-fadeInTop delay-600">Discover our strategic investment sectors driving innovation and transformation.</p> */}
       </div>
 
       <div className="h-16"></div>
 
       {/* Options Container */}
-      <div className="options flex w-full max-w-[95vw] h-[600px] mx-auto px-4 items-stretch overflow-hidden relative">
+      <div className="options flex w-full max-w-[95vw] h-[600px]  rounded-xl  mx-auto  items-stretch overflow-hidden relative">
         {options.map((option, index) => (
           <div
             key={index}
@@ -86,21 +81,20 @@ const InteractiveSelector2 = () => {
               ${activeIndex === index ? 'active' : ''}
             `}
             style={{
-              background: `linear-gradient(135deg, ${
+              background: `linear-gradient(0deg, ${
                 activeIndex === index
-                  ? 'var(--tw-gradient-stops)'
-                  : '#2a2a2a 0%, #1a1a1a 100%'
+                  ? 'var(--tw-gradient-stops, )'
+                  : '#18242fe6'
               })`,
+              
               backfaceVisibility: 'hidden',
               opacity: animatedOptions.includes(index) ? 1 : 0,
               transform: animatedOptions.includes(index) ? 'translateX(0)' : 'translateX(-60px)',
               minWidth: '60px',
               minHeight: '100px',
               margin: 0,
-              borderRadius: 0,
-              borderWidth: '2px',
-              borderStyle: 'solid',
-              borderColor: activeIndex === index ? '#fff' : '#292929',
+              // borderRadius: '16px',
+            
               cursor: 'pointer',
               boxShadow: activeIndex === index
                 ? '0 20px 60px rgba(0,0,0,0.50)'
@@ -114,34 +108,23 @@ const InteractiveSelector2 = () => {
               overflow: 'hidden',
               willChange: 'flex-grow, box-shadow, background',
               ...(activeIndex === index && {
-                background: `linear-gradient(135deg, ${option.bgGradient.split(' ').map(c => {
+                background: `linear-gradient(180deg, ${option.bgGradient.split(' ').map(c => {
                   const colorMap: Record<string, string> = {
-                    'from-indigo-600': '#4f46e5',
-                    'via-purple-600': '#9333ea',
-                    'to-pink-600': '#db2777',
-                    'from-slate-600': '#475569',
-                    'via-gray-600': '#4b5563',
-                    'to-zinc-600': '#52525b',
-                    'from-red-600': '#dc2626',
-                    'via-orange-600': '#ea580c',
-                    'to-yellow-600': '#ca8a04',
-                    'from-teal-600': '#0d9488',
-                    'via-cyan-600': '#0891b2',
-                    'to-sky-600': '#0284c7',
-                    'from-amber-600': '#d97706',
-                    'from-purple-600': '#9333ea',
-                    'via-pink-600': '#db2777',
-                    'to-red-600': '#dc2626',
-                    'from-green-600': '#16a34a',
-                    'via-emerald-600': '#059669',
-                    'to-teal-600': '#0d9488',
-                    'from-blue-600': '#2563eb',
-                    'via-indigo-600': '#4f46e5',
-                    'to-purple-600': '#9333ea',
-                    'via-rose-600': '#e11d48',
-                    'from-cyan-600': '#0891b2',
-                    'via-blue-600': '#2563eb',
-                    'to-indigo-600': '#4f46e5',
+                    'from-purple-600': '#001D4E',
+                    'via-pink-600': '#000D23',
+                    'to-red-600': '#000D23',
+                    'from-green-600': '#001D4E',
+                    'via-emerald-600': '#000D23',
+                    'to-teal-600': '#000D23',
+                    'from-blue-600': '#001D4E',
+                    'via-indigo-600': '#000D23',
+                    'to-purple-600': '#000D23',
+                    'from-red-600': '#001D4E',
+                    'via-rose-600': '#000D23',
+                    'to-pink-600': '#000D23',
+                    'from-cyan-600': '#001D4E',
+                    'via-blue-600': '#000D23',
+                    'to-indigo-600': '#000D23',
                   };
                   return colorMap[c] || '#333';
                 }).join(', ')})`
@@ -247,4 +230,4 @@ const InteractiveSelector2 = () => {
   );
 };
 
-export default InteractiveSelector2;
+export default InteractiveSelector;
