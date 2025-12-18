@@ -77,17 +77,17 @@ const InteractiveSelector = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#000D23] font-sans text-white py-8 md:py-0">
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#000D23] font-sans text-white ">
       {/* Header Section */}
-      <div className="w-full max-w-7xl px-6 mt-4 md:mt-8 mb-2 text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg animate-fadeInTop delay-300">Are you a Startup?</h1>
+      <div className="w-full max-w-7xl  text-center">
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white  tracking-tight drop-shadow-lg animate-fadeInTop delay-300">Are you a Startup?</h1>
         {/* <p className="text-xl md:text-2xl text-gray-300 font-medium max-w-3xl mx-auto animate-fadeInTop delay-600">Discover our strategic investment sectors driving innovation and transformation.</p> */}
       </div>
 
       <div className="h-8 md:h-16"></div>
 
       {/* Options Container - Vertical on mobile, Horizontal on desktop */}
-      <div className="options flex flex-col md:flex-row w-full md:max-w-[95vw] min-h-[600px] md:h-[600px] max-w-[90vw] rounded-xl mx-auto items-stretch overflow-hidden relative">
+      <div className="options flex flex-col md:flex-row w-full md:max-w-[95vw] min-h-[400px] md:h-[600px] max-w-[90vw] rounded-xl mx-auto items-stretch overflow-hidden relative">
         {options.map((option, index) => (
           <div
             key={index}
@@ -110,7 +110,7 @@ const InteractiveSelector = () => {
                   ? 'translateY(-30px)'
                   : 'translateX(-60px)',
               minWidth: isMobile ? '100%' : '60px',
-              minHeight: isMobile ? (activeIndex === index ? '400px' : '60px') : '100px',
+              minHeight: isMobile ? (activeIndex === index ? '280px' : '60px') : '100px',
               margin: 0,
               cursor: 'pointer',
               boxShadow: activeIndex === index
