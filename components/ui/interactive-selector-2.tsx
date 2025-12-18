@@ -65,7 +65,7 @@ const InteractiveSelector = () => {
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#000D23] font-sans text-white">
       {/* Header Section */}
       <div className="w-full max-w-7xl px-6 mt-8 mb-2 text-center">
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg animate-fadeInTop delay-300">Are you an Investor</h1>
+        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg animate-fadeInTop delay-300">Are you a Startup?</h1>
         {/* <p className="text-xl md:text-2xl text-gray-300 font-medium max-w-3xl mx-auto animate-fadeInTop delay-600">Discover our strategic investment sectors driving innovation and transformation.</p> */}
       </div>
 
