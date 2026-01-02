@@ -159,17 +159,21 @@ const InteractiveSelector = () => {
               <div
                 className="absolute inset-0 flex items-center justify-center transition-opacity duration-500 px-3 py-2"
               >
-                <h3
-                  className="text-xs sm:text-sm md:text-xl lg:text-2xl font-bold text-gray-800 tracking-wide md:tracking-wider text-center md:text-left"
+                <div
+                  className="flex flex-row items-center justify-between w-full h-full px-4 py-4 md:px-6 md:py-6"
                   style={{
-                    opacity: activeIndex !== index ? 1 : 0,
                     writingMode: isMobile ? 'horizontal-tb' : 'vertical-rl',
                     textOrientation: 'mixed',
                     transform: 'rotate(180deg)'
                   }}
                 >
-                  {option.shortTitle}
-                </h3>
+                  <h3 className="text-xs sm:text-sm md:text-xl lg:text-2xl font-bold text-gray-800 tracking-wide md:tracking-wider text-center md:text-left">
+                    {option.shortTitle}
+                  </h3>
+                  <span className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-gray-500">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
               </div>
             )}
           </div>
