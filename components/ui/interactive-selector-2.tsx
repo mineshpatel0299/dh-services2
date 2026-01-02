@@ -77,6 +77,13 @@ const InteractiveSelector = () => {
     <div className="relative flex flex-col items-center justify-start md:justify-center min-h-screen bg-[#FEF9EF]  text-gray-900">
       {/* Header Section */}
       <div className="w-full max-w-7xl text-center">
+        {/* Badge */}
+        <div className="inline-flex items-center justify-center mt-4 md:mt-6 mb-4 md:mb-6 animate-fadeInTop">
+          <div className="h-[35px] w-[250px] md:h-[41px] md:w-[300px] rounded-full bg-[#fcba00]/15 border border-amber-200 flex items-center justify-center px-6 shadow-sm">
+            <span className="text-xs md:text-sm font-medium text-amber-800">Service</span>
+          </div>
+        </div>
+
         <h1 className="text-2xl md:text-4xl lg:text-6xl font-normal text-gray-900 tracking-tight drop-shadow-sm animate-fadeInTop delay-300" style={{ fontFamily: 'Canela Regular, serif' }}>Are you a Startup?</h1>
         {/* <p className="text-lg md:text-xl text-gray-700 font-medium max-w-3xl mx-auto animate-fadeInTop delay-600">Discover our strategic investment sectors driving innovation and transformation.</p> */}
       </div>
