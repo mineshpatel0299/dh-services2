@@ -80,11 +80,11 @@ const InteractiveSelector = () => {
         {/* Badge */}
         <div className="inline-flex items-center justify-center mt-4 md:mt-6 mb-4 md:mb-6 animate-fadeInTop">
           <div className="h-[35px] w-[250px] md:h-[41px] md:w-[300px] rounded-full bg-[#fcba00]/15 border border-amber-200 flex items-center justify-center px-6 shadow-sm">
-            <span className="text-xs md:text-sm font-medium text-amber-800">Service</span>
+            <span className="text-xs md:text-sm font-medium text-[#000d23]">Service</span>
           </div>
         </div>
 
-        <h1 className="text-2xl md:text-4xl lg:text-6xl font-normal text-gray-900 tracking-tight drop-shadow-sm animate-fadeInTop delay-300" style={{ fontFamily: 'Canela Regular, serif' }}>Are you a Startup?</h1>
+        <h1 className="text-2xl md:text-4xl lg:text-6xl font-normal text-[#000d23] tracking-tight drop-shadow-sm animate-fadeInTop delay-300" style={{ fontFamily: 'Canela Regular, serif' }}>Are you a Startup?</h1>
         {/* <p className="text-lg md:text-xl text-gray-700 font-medium max-w-3xl mx-auto animate-fadeInTop delay-600">Discover our strategic investment sectors driving innovation and transformation.</p> */}
       </div>
 
@@ -152,7 +152,7 @@ const InteractiveSelector = () => {
             {/* Content Area - Shows when active */}
             {activeIndex === index && (
               <div key={`content-${index}`} className="absolute inset-0 p-4 md:p-10 flex flex-col justify-end items-start z-1 overflow-y-auto">
-                <h2 className="text-lg sm:text-xl md:text-3xl lg:text-1xl font-bold text-gray-900 mb-1 md:mb-5 drop-shadow-sm leading-tight animate-fadeInTitle" style={{ fontFamily: 'lato' }}>
+                <h2 className="text-lg sm:text-xl md:text-3xl lg:text-1xl font-bold text-[#000d23] mb-1 md:mb-5 drop-shadow-sm leading-tight animate-fadeInTitle" style={{ fontFamily: 'lato' }}>
                   {option.title}
                 </h2>
                 <p className="text-xs sm:text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed max-w-full md:max-w-[85%]">
@@ -184,7 +184,7 @@ const InteractiveSelector = () => {
                     transform: 'rotate(180deg)'
                   }}
                 >
-                  <h3 className="text-xs sm:text-sm md:text-xl lg:text-xl font-bold text-gray-800 tracking-wide md:tracking-wider text-center md:text-left">
+                  <h3 className="text-xs sm:text-sm md:text-xl lg:text-xl font-bold text-[#000d23] tracking-wide md:tracking-wider text-center md:text-left">
                     {option.shortTitle}
                   </h3>
                   <span className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-gray-500">
