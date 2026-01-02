@@ -18,10 +18,9 @@ const InteractiveSelector = () => {
       icon: <FaCampground size={32} className="text-white" />
     },
     {
-      title: "Business Valuation",
+      title: "Business Valuation ",
       shortTitle: "Business Valuation",
-      description: "Understanding your Startup's net-worth is vital to ensure that you're not diluting too much equity when raising funds. We can help you uncover the true value of your business that's fair to you as well as the investors. .",
-      bgGradient: "from-green-600 via-emerald-600 to-teal-600",
+      description: "Understanding your Startup's net-worth is vital to ensure that you're not diluting too much equity when raising funds. We can help you uncover the true value of your business that's fair to you as well as the investors.",
       icon: <FaFire size={32} className="text-white" />
     },
     {
@@ -34,7 +33,7 @@ const InteractiveSelector = () => {
     {
       title: "Shared CFO",
       shortTitle: "Shared CFO",
-      description: "SAs the founder of a venture that's growing at a fast pace, managing all functions by yourself can be tough. Our seasoned financial experts can take complete charge of your finance function providing leadership and insights your business needs, precisely when you need them.",
+      description: "As the founder of a venture that's growing at a fast pace, managing all functions by yourself can be tough. Our seasoned financial experts can take complete charge of your finance function providing leadership and insights your business needs, precisely when you need them.",
       bgGradient: "from-red-600 via-rose-600 to-pink-600",
       icon: <FaHotTub size={32} className="text-white" />
     },
@@ -47,20 +46,6 @@ const InteractiveSelector = () => {
     }
   };
 
-  // Handle window resize for responsive behavior
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    // Set initial value
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Animate options on mount
   useEffect(() => {
     const timers: NodeJS.Timeout[] = [];
 
@@ -76,99 +61,94 @@ const InteractiveSelector = () => {
     };
   }, []);
 
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[#000D23] font-sans text-white ">
+    <div className="relative flex flex-col items-center justify-start md:justify-center min-h-screen bg-[#FEF9EF] font-sans text-gray-900">
       {/* Header Section */}
-      <div className="w-full max-w-7xl  text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white  tracking-tight drop-shadow-lg animate-fadeInTop delay-300">Are you a Startup?</h1>
-        {/* <p className="text-xl md:text-2xl text-gray-300 font-medium max-w-3xl mx-auto animate-fadeInTop delay-600">Discover our strategic investment sectors driving innovation and transformation.</p> */}
+      <div className="w-full max-w-7xl text-center">
+        <h1 className="text-2xl md:text-4xl lg:text-6xl font-extrabold text-gray-900 tracking-tight drop-shadow-sm animate-fadeInTop delay-300">Are you a Startup?</h1>
+        {/* <p className="text-lg md:text-xl text-gray-700 font-medium max-w-3xl mx-auto animate-fadeInTop delay-600">Discover our strategic investment sectors driving innovation and transformation.</p> */}
       </div>
 
-      <div className="h-8 md:h-16"></div>
+      <div className="h-3 md:h-12"></div>
 
-      {/* Options Container - Vertical on mobile, Horizontal on desktop */}
-      <div className="options flex flex-col md:flex-row w-full md:max-w-[95vw] min-h-[400px] md:h-[600px] max-w-[90vw] rounded-xl mx-auto items-stretch overflow-hidden relative">
+      {/* Options Container - Vertical on mobile, horizontal on desktop */}
+      <div className="options flex flex-col md:flex-row w-full md:max-w-[79vw] h-auto md:h-[500px] max-w-[75vw] rounded-xl mx-auto items-stretch overflow-visible  relative gap-1.5 md:gap-2 pb-6 md:pb-0">
         {options.map((option, index) => (
           <div
             key={index}
             className={`
-              option relative flex flex-col justify-end overflow-hidden transition-all duration-700 ease-in-out
+              option relative flex flex-col justify-start  transition-all duration-700 ease-in-out rounded-lg
               ${activeIndex === index ? 'active' : ''}
             `}
             style={{
-              background: `linear-gradient(0deg, ${
-                activeIndex === index
-                  ? 'var(--tw-gradient-stops, )'
-                  : '#18242fe6'
-              })`,
-
+              background: activeIndex === index
+                ? 'linear-gradient(135deg, #FEF9EF 0%, #FFF8E7 30%, rgba(252, 186, 0, 0.08) 100%)'
+                : 'linear-gradient(135deg, rgba(254, 249, 239, 0.5) 0%, rgba(252, 186, 0, 0.03) 100%)',
+              border: '1px solid rgba(152, 167, 175, 0.2)',
+              backdropFilter: 'blur(10px)',
               backfaceVisibility: 'hidden',
               opacity: animatedOptions.includes(index) ? 1 : 0,
-              transform: animatedOptions.includes(index)
-                ? 'translate(0, 0)'
-                : isMobile
-                  ? 'translateY(-30px)'
-                  : 'translateX(-60px)',
-              minWidth: isMobile ? '100%' : '60px',
-              minHeight: isMobile ? (activeIndex === index ? '280px' : '60px') : '100px',
+              transform: animatedOptions.includes(index) ? 'translateY(0)' : 'translateY(-20px)',
+              minWidth: isMobile ? '100%' : '50px',
+              minHeight: isMobile
+                ? (activeIndex === index ? '292px' : '50px')
+                : '83px',
               margin: 0,
+
               cursor: 'pointer',
               boxShadow: activeIndex === index
-                ? '0 20px 60px rgba(0,0,0,0.50)'
-                : '0 10px 30px rgba(0,0,0,0.30)',
-              flex: activeIndex === index ? (isMobile ? '10 1 0%' : '7 1 0%') : '1 1 0%',
+                ? '0 20px 60px rgba(252, 186, 0, 0.05), 0 10px 30px rgba(0,0,0,0.05)'
+                : '0 10px 30px rgba(0,0,0,0.05)',
+              flex: activeIndex === index
+                ? (isMobile ? '0 0 auto' : '7 1 0%')
+                : (isMobile ? '0 0 auto' : '1 1 0%'),
               zIndex: activeIndex === index ? 10 : 1,
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'flex-end',
+              justifyContent: 'flex-start',
               position: 'relative',
               overflow: 'hidden',
-              willChange: 'flex-grow, box-shadow, background',
-              ...(activeIndex === index && {
-                background: `linear-gradient(180deg, ${option.bgGradient.split(' ').map(c => {
-                  const colorMap: Record<string, string> = {
-                    'from-purple-600': '#001D4E',
-                    'via-pink-600': '#000D23',
-                    'to-red-600': '#000D23',
-                    'from-green-600': '#001D4E',
-                    'via-emerald-600': '#000D23',
-                    'to-teal-600': '#000D23',
-                    'from-blue-600': '#001D4E',
-                    'via-indigo-600': '#000D23',
-                    'to-purple-600': '#000D23',
-                    'from-red-600': '#001D4E',
-                    'via-rose-600': '#000D23',
-                    'to-pink-600': '#000D23',
-                    'from-cyan-600': '#001D4E',
-                    'via-blue-600': '#000D23',
-                    'to-indigo-600': '#000D23',
-                  };
-                  return colorMap[c] || '#333';
-                }).join(', ')})`
-              })
+              willChange: 'flex-grow, box-shadow, background'
             }}
             onClick={() => handleOptionClick(index)}
-            onMouseEnter={() => !isMobile && handleOptionClick(index)}
+            onMouseEnter={() => {
+              // Only use hover on desktop (md and up)
+              if (!isMobile) {
+                handleOptionClick(index);
+              }
+            }}
           >
             {/* Shadow effect */}
             <div
               className="shadow absolute left-0 right-0 pointer-events-none transition-all duration-700 ease-in-out"
               style={{
-                bottom: activeIndex === index ? '0' : '-40px',
-                height: '120px',
+                bottom: activeIndex === index ? '0' : '-33px',
+                height: '100px',
                 boxShadow: activeIndex === index
-                  ? 'inset 0 -120px 120px -120px #000, inset 0 -120px 120px -80px #000'
-                  : 'inset 0 -120px 0px -120px #000, inset 0 -120px 0px -80px #000'
+                  ? 'inset 0 -100px 100px -100px rgba(252, 186, 0, 0.15), inset 0 -100px 100px -67px rgba(0, 0, 0, 0.05)'
+                  : 'inset 0 -100px 0px -100px rgba(0, 0, 0, 0), inset 0 -100px 0px -67px rgba(0, 0, 0, 0)'
               }}
             ></div>
 
             {/* Content Area - Shows when active */}
             {activeIndex === index && (
-              <div className="absolute inset-0 p-5 md:p-12 flex flex-col justify-center items-start z-1 animate-fadeIn overflow-y-auto">
-                <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-6 drop-shadow-lg leading-tight">
+              <div className="absolute inset-0 p-4 md:p-10 flex flex-col justify-end items-start z-1 animate-fadeIn overflow-y-auto">
+                <h2 className="text-lg sm:text-xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 md:mb-5 drop-shadow-sm leading-tight">
                   {option.title}
                 </h2>
-                <p className="text-sm md:text-xl lg:text-2xl text-gray-100 leading-relaxed drop-shadow-md max-w-full md:max-w-[85%]">
+                <p className="text-xs sm:text-xs md:text-lg lg:text-xl text-gray-700 leading-relaxed max-w-full md:max-w-[85%]">
                   {option.description}
                 </p>
               </div>
@@ -177,13 +157,15 @@ const InteractiveSelector = () => {
             {/* Collapsed Title - Shows when not active */}
             {activeIndex !== index && (
               <div
-                className="absolute inset-0 flex items-center justify-center transition-opacity duration-500"
+                className="absolute inset-0 flex items-center justify-center transition-opacity duration-500 px-3 py-2"
               >
                 <h3
-                  className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-300 tracking-wider"
+                  className="text-xs sm:text-sm md:text-xl lg:text-2xl font-bold text-gray-800 tracking-wide md:tracking-wider text-center md:text-left"
                   style={{
+                    opacity: activeIndex !== index ? 1 : 0,
                     writingMode: isMobile ? 'horizontal-tb' : 'vertical-rl',
-                    textOrientation: isMobile ? 'initial' : 'mixed'
+                    textOrientation: 'mixed',
+                    transform: 'rotate(180deg)'
                   }}
                 >
                   {option.shortTitle}
@@ -250,3 +232,8 @@ const InteractiveSelector = () => {
 };
 
 export default InteractiveSelector;
+
+
+
+
+

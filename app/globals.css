@@ -17,11 +17,13 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-lato), sans-serif;
+  font-weight: 400;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading), serif;
+  font-family: var(--font-lato), sans-serif;
+  font-weight: 700;
 }
 
 @layer utilities {
