@@ -74,10 +74,10 @@ const InteractiveSelector = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-start md:justify-center min-h-screen bg-[#FEF9EF] font-sans text-gray-900">
+    <div className="relative flex flex-col items-center justify-start md:justify-center min-h-screen bg-[#FEF9EF]  text-gray-900">
       {/* Header Section */}
       <div className="w-full max-w-7xl text-center">
-        <h1 className="text-2xl md:text-4xl lg:text-6xl font-extrabold text-gray-900 tracking-tight drop-shadow-sm animate-fadeInTop delay-300">Are you a Startup?</h1>
+        <h1 className="text-2xl md:text-4xl lg:text-6xl font-normal text-gray-900 tracking-tight drop-shadow-sm animate-fadeInTop delay-300" style={{ fontFamily: 'Canela Regular, serif' }}>Are you a Startup?</h1>
         {/* <p className="text-lg md:text-xl text-gray-700 font-medium max-w-3xl mx-auto animate-fadeInTop delay-600">Discover our strategic investment sectors driving innovation and transformation.</p> */}
       </div>
 
@@ -94,8 +94,8 @@ const InteractiveSelector = () => {
             `}
             style={{
               background: activeIndex === index
-                ? 'linear-gradient(135deg, #FEF9EF 0%, #FFF8E7 30%, rgba(252, 186, 0, 0.08) 100%)'
-                : 'linear-gradient(135deg, rgba(254, 249, 239, 0.5) 0%, rgba(252, 186, 0, 0.03) 100%)',
+                ? 'linear-gradient(-180deg, rgba(252, 186, 0, 0.3) 0% , rgba(252, 186, 0, 0.3) 2%, rgba(252, 186, 0, 0.02) 100%)'
+                : 'linear-gradient(-180deg, rgba(252, 186, 0, 0.3) 0% , rgba(252, 186, 0, 0.3) 2%, rgba(252, 186, 0, 0.02) 100%)',
               border: '1px solid rgba(152, 167, 175, 0.2)',
               backdropFilter: 'blur(10px)',
               backfaceVisibility: 'hidden',
@@ -144,12 +144,22 @@ const InteractiveSelector = () => {
 
             {/* Content Area - Shows when active */}
             {activeIndex === index && (
-              <div className="absolute inset-0 p-4 md:p-10 flex flex-col justify-end items-start z-1 animate-fadeIn overflow-y-auto">
-                <h2 className="text-lg sm:text-xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 md:mb-5 drop-shadow-sm leading-tight">
+              <div key={`content-${index}`} className="absolute inset-0 p-4 md:p-10 flex flex-col justify-end items-start z-1 overflow-y-auto">
+                <h2 className="text-lg sm:text-xl md:text-3xl lg:text-1xl font-bold text-gray-900 mb-1 md:mb-5 drop-shadow-sm leading-tight animate-fadeInTitle" style={{ fontFamily: 'lato' }}>
                   {option.title}
                 </h2>
-                <p className="text-xs sm:text-xs md:text-lg lg:text-xl text-gray-700 leading-relaxed max-w-full md:max-w-[85%]">
-                  {option.description}
+                <p className="text-xs sm:text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed max-w-full md:max-w-[85%]">
+                  {option.description.split(' ').map((word, wordIndex) => (
+                    <span
+                      key={wordIndex}
+                      className="inline-block animate-fadeInWord mr-[0.3em]"
+                      style={{
+                        animationDelay: `${0.15 + wordIndex * 0.025}s`
+                      }}
+                    >
+                      {word}
+                    </span>
+                  ))}
                 </p>
               </div>
             )}
@@ -167,7 +177,7 @@ const InteractiveSelector = () => {
                     transform: 'rotate(180deg)'
                   }}
                 >
-                  <h3 className="text-xs sm:text-sm md:text-xl lg:text-2xl font-bold text-gray-800 tracking-wide md:tracking-wider text-center md:text-left">
+                  <h3 className="text-xs sm:text-sm md:text-xl lg:text-xl font-bold text-gray-800 tracking-wide md:tracking-wider text-center md:text-left">
                     {option.shortTitle}
                   </h3>
                   <span className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-gray-500">
@@ -182,6 +192,14 @@ const InteractiveSelector = () => {
 
       {/* Custom animations */}
       <style jsx>{`
+        @font-face {
+          font-family: 'Canela Regular';
+          src: url('/fonts/fonnts.com-72102/fonts/fonnts.com-Canela-Regular.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+
         @keyframes slideFadeIn {
           0% {
             opacity: 0;
@@ -213,6 +231,17 @@ const InteractiveSelector = () => {
           }
         }
 
+        @keyframes fadeInContent {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
         .animate-fadeInTop {
           opacity: 0;
           transform: translateY(-20px);
@@ -221,6 +250,23 @@ const InteractiveSelector = () => {
 
         .animate-fadeIn {
           animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .animate-fadeInTitle {
+          opacity: 0;
+          animation: fadeInContent 0.5s ease-out forwards;
+          animation-delay: 0.1s;
+        }
+
+        .animate-fadeInDescription {
+          opacity: 0;
+          animation: fadeInContent 0.6s ease-out forwards;
+          animation-delay: 0.25s;
+        }
+
+        .animate-fadeInWord {
+          opacity: 0;
+          animation: fadeInContent 0.35s ease-out forwards;
         }
 
         .delay-300 {
